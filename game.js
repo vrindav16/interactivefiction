@@ -1,29 +1,29 @@
 game.things = (function(){
   var items = {
-    bat: {
-      name: 'bat',
+    apple: {
+      name: 'apple',
       effects: {
-        'player_inventory': { message: "<p>You picked up the bat!</p>",
+        'player_inventory': { message: "<p>You picked up the apple!</p>",
                             object: "addItem",
                             subject: "deleteItem"
         },
-        'dino': { message: "<p>You hit the dino with the bat.</p><p>Now he's angry.</p>",
+        'android3': { message: "<p>You fed Android an apple!</p><p>Now he's happy!</p>",
                   subject: 'deleteItem',
                   object: 'deleteItem',
-                  callback: function(){game.screen.callDino()}
+                  callback: function(){game.screen.callAndroid3()}
 
         },
         'empty': {
-              message: "<p>You set the bat down over there.</p>",
+              message: "<p>You set the apple down over there.</p>",
               object: "addItem",
               subject: "deleteItem"
         }
       }
     },
-    dino: {
-      name: 'dino',
+    android3: {
+      name: 'android3',
       effects: {
-        'player_inventory': { message: "<p>You can't move the dino...</p>" } 
+        'player_inventory': { message: "<p>You can't move the Android...</p>" } 
       }
     }
   };
@@ -81,8 +81,8 @@ game.things = (function(){
 
 game.slide = (function(){
   var inventory = {
-    slide1: 'bat',
-    slide2: 'dino',
+    slide1: 'apple',
+    slide2: 'android3',
     slide3: null
   };
   var addItem = function(item){
@@ -133,7 +133,7 @@ game.slide = (function(){
 })();
 game.playerInventory = (function(){
   var items = {
-    bat: false
+    apple: false
   };
   var clearInventory = function(){
     playerInventoryBoxes = document.querySelectorAll('#player_inventory .inventory-box');
@@ -161,7 +161,7 @@ game.playerInventory = (function(){
     for(var item in this.items){
       if(this.items[item] === true){
         inventoryBoxes[counter].classList.remove("empty");
-        inventoryBoxes[counter].innerHTML = "<img src='"+item+".png' alt='"+item+"' class='item' id='"+item+"'>";
+        inventoryBoxes[counter].innerHTML = "<img src='"+item+".jpg' alt='"+item+"' class='item' id='"+item+"'>";
       }
       counter = counter + 1;
     };
@@ -179,11 +179,11 @@ game.screen = (function(){
     game.playerInventory.draw();
     game.slide.draw(game.slide.currentSlide());
   };
-  var callDino = function(){
+  var callAndroid3 = function(){
     $('body').raptorize({ 'enterOn' : 'timer', 'delayTime' : 2000 });
   };
   return {
-    callDino: callDino,
+    callAndroid3: callAndroid3,
     draw: draw
   }
 })();
